@@ -1,5 +1,41 @@
-# How to deploy a VM, really fast
+# How to deploy a Red Hat Enterprise Linux 8 VM, really fast
 Using composer, libvirt, QEMU, virsh and some Ansible.
+
+## Example deployment
+Below, a test deployment of a RHEL8 VM. It's available for SSH within less than 7 seconds.
+Follow the instructions below to do this yourself. Feel free to contribute improvements to rhel8-base.toml and qcow2.ks if you manage to do it faster than 6.5 seconds :-)
+
+```
+[mglantz@darkred templates]$ time sudo c_vm mtest15
+Formatting '/var/lib/libvirt/images/mtest15.qcow2', fmt=qcow2 size=16106127360 backing_file=/home/mglantz/code/ansible/vm/rhel8-base-0.6.0.qcow2 cluster_size=65536 lazy_refcounts=off refcount_bits=16
+Domain mtest15 created from /home/mglantz/code/ansible/vm/templates/mtest15.xml
+
+IP-ADDRESS OF SYSTEM: 192.168.122.181
+ [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost
+does not match 'all'
+
+
+PLAY [Provision VM] *************************************************************************************
+
+TASK [Debug] ********************************************************************************************
+ok: [localhost] => {
+    "msg": "IP of VM is: 192.168.122.181"
+}
+
+TASK [Add host into in-memory inventory] ****************************************************************
+changed: [localhost]
+
+TASK [Check so that server is online] *******************************************************************
+ok: [localhost]
+
+PLAY RECAP **********************************************************************************************
+localhost                  : ok=3    changed=1    unreachable=0    failed=0   
+
+
+real	0m6.663s
+user	0m1.041s
+sys	0m0.223s
+```
 
 ## Installation of composer and sync of repos
 
