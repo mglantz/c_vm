@@ -1,0 +1,35 @@
+name = "rhel8-base"
+description = "A general purpose rhel8 image"
+version = "0.6.0"
+
+[[packages]]
+name = "curl"
+version = "*"
+
+[[packages]]
+name = "file"
+version = "*"
+
+[[packages]]
+name = "git"
+version = "*"
+
+[[packages]]
+name = "gnupg2"
+version = "*"
+
+[[packages]]
+name = "sudo"
+version = "*"
+
+[[packages]]
+name = "tar"
+version = "*"
+
+[[packages]]
+name = "xz"
+version = "*"
+
+[[customizations.user]]
+name = "root"
+key = "ssh-rsa key-here"
