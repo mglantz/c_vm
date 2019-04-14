@@ -1,4 +1,5 @@
 # How to deploy a VM, really fast
+Using composer, libvirt, QEMU, virsh and some Ansible.
 
 ## Installation of composer and sync of repos
 
@@ -92,7 +93,7 @@ composer-cli compose image UUID-OF-BUILD
 ```
 15. Copy the disk image to the server you are deploying the VM from.
 
-16. Copy c_vm and provision_vm.yaml to that server and ensure you have ansible installed.
+16. Copy __c_vm__, __provision_vm.yaml__ and __template-vm.xml__ to the server you are deploying from and ensure you have ansible installed.
 ```
 dnf install python-pip
 pip install ansible
