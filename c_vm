@@ -1,0 +1,27 @@
+#!/bin/bash
+
+COMPOSER--IMG-TEMPLATE=""
+VMSIZE="15G"
+VM-XML-TEMPLATE="~/Documents/template-noansible.xml"
+VM-XML-BASEPATH="/home/myuser"
+PLAYBOOK="/home/myuser/provision_vm.yaml"
+
+if [ "$1" == "" ]; then
+	echo "Usage: $0 vm-name"
+	exit 1
+else
+	vm_name=$1
+fi
+qemu-img create -f qcow2 -b $COMPOSER-IMG-TEMPLATE /var/lib/libvirt/images/$vm_name.qcow2 $VMSIZE
+
+if [ -f /var/lib/libvirt/images/$vm_name.qcow2 ]; then
+        cp $VM-XML-TEMPLATE $VM-XML-BASEPATH/$vm_name.xml
+        sed -i -e "s/VMNAME/$vm_name/g" $VM-XML-BASEPATH/$vm_name.xml
+	virsh create $VM-XML-BASEPATH/$vm_name.xml
+fi
+
+IPADDR=$(virsh domifaddr $vm_name|grep vnet|awk '{ print $4 }'|sed 's/\/24//')
+
+echo "IP-ADDRESS OF SYSTEM: $IPADDR"
+
+ansible-playbook $PLAYBOOK -e vm_name=$IPADDR
