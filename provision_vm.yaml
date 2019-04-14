@@ -1,0 +1,21 @@
+- name: Provision VM
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    vm_name: 
+    ansible_ssh_pipelining: yes
+  tasks:
+  - name: Debug
+    debug:
+      msg: "IP of VM is: {{ vm_name }}"
+
+  - name: Add host into in-memory inventory
+    add_host:
+      name: "{{ vm_name }}"
+
+  - name: Check so that server is online
+    wait_for:
+      port: 22
+      search_regex: OpenSSH
+      host: "{{ vm_name }}"
