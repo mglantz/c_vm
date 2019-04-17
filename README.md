@@ -3,7 +3,7 @@ Using composer, libvirt, QEMU, virsh and some Ansible.
 
 ## Example deployment
 Below, a test deployment of a RHEL8 VM. It's available for SSH within less than 7 seconds.
-Follow the instructions below to do this yourself. Feel free to contribute improvements to rhel8-base.toml and qcow2.ks if you manage to do it faster than 6.5 seconds :-)
+Follow the instructions below to do this yourself. Feel free to contribute improvements to rhel8-base.toml and qcow2.ks if you manage to optimize anything.
 
 ```
 [mglantz@darkred templates]$ time sudo c_vm mtest15
