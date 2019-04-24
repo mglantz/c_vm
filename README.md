@@ -119,7 +119,7 @@ composer-cli blueprints list|grep rhel8-base
 
 13. Start a build with your new blueprint
 ```
-composer-cli compose start rhel8-base
+composer-cli compose start rhel8-base qcow2
 ```
 
 14. Verify the build and when completed, download the disk image
